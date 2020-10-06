@@ -1,0 +1,28 @@
+.createCard{
+    width: 500px;
+    margin: 0 auto;
+    border: 2px solid lightgray !important;
+    background: white;
+    border-radius: 5px;
+}
+.cardBody{
+    padding: 35px;
+}
+.createAccountInput{
+    width: 25rem;
+    border-style: none none double;
+    margin: 5px 0;
+}
+.creactAccountButton{
+    border-style: none;
+    background-color: white;
+    color: rgb(59, 196, 241);
+    text-decoration: underline;
+}
+.registerButton{
+    color: white;
+    width: 410px;
+    background: rgb(89, 78, 233);
+    padding: 8px;
+    border-radius: 8px;
+}
