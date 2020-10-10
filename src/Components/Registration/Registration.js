@@ -1,9 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Registration.css';
 import logo from '../VolunteerAllImages/logos/Group 1329.png'
 import { userContext } from '../../App';
 import { useHistory, useParams } from 'react-router-dom';
-import VolunteerOrgs from '../VolunteerOrgs/VolunteerOrgs';
 
 
 const Registration = () => {
@@ -13,9 +12,23 @@ const Registration = () => {
             email: '',
             organizationName: '',
       });
+
       const history = useHistory();
+
+      const [volunteerOrgs, setVolunteerOrgs] = useState([]);
       const {id} = useParams();
-      const {title} = VolunteerOrgs.find(data => data.id == id);
+
+      useEffect(()=>{
+            fetch('https://evening-springs-55497.herokuapp.com/eventDetails/'+id,{
+                  method: 'GET',
+                  headers: {'Content-Type': 'application/json'}
+              })
+            .then(res => res.json())
+            .then(data => {
+                  setVolunteerOrgs(data.find(data => data.id == id));
+            });
+      },[])
+      const {title,image} = volunteerOrgs;
 
       const handleBlour = (e) => {
                         const newUserInfo = {...volunteerInformation};
@@ -23,10 +36,12 @@ const Registration = () => {
                         newUserInfo.fullName = loggedInUser.name;
                         newUserInfo.email = loggedInUser.email;
                         newUserInfo.title = title;
+                        newUserInfo.image = image;
                         setVolunteerInformation(newUserInfo);
                   }
+
       const handleSubmit = () => {
-            fetch('http://localhost:5555/addVolunteers', {
+            fetch('https://evening-springs-55497.herokuapp.com/addVolunteers', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(volunteerInformation),
@@ -38,6 +53,7 @@ const Registration = () => {
             .catch(err=> console.log(err));
             history.push('/registeredUserInfo');
       }
+      
       return (
          <div>
                <div>

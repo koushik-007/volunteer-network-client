@@ -8,21 +8,23 @@ const RegisteredInformation = () => {
     const [volunteerInfo, setVolunteerInfo] =  useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/registeredUserInfo?email='+loggedInUser.email, {
+        fetch('https://evening-springs-55497.herokuapp.com/registeredUserInfo?email='+loggedInUser.email, {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())
         .then(data => setVolunteerInfo(data));
-    }, [loggedInUser.email])
-    console.log(volunteerInfo);
+    }, [])
+
     return (
         <div>
             <Header></Header>
-            <div className="row">
+            <div className="container">
+                <div className="row">
                 {
                     volunteerInfo.map(data => <UserData data={data}></UserData>)
                 }
+                </div>
             </div>
         </div>
     );

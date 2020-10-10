@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import ShowVolunteers from '../ShowVolunteers/ShowVolunteers';
-import volunteerOrgs from '../VolunteerOrgs/VolunteerOrgs'
+
 const HomePage = () => {
-   
+   const [volunteerOrgs, setVolunteerOrgs] = useState([]);
+
+    useEffect(() => {
+        fetch('https://evening-springs-55497.herokuapp.com/events', {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(data => setVolunteerOrgs(data));
+    }, []);
     return (
         <div>
             <Header></Header>

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { userContext } from '../../App';
 import logo from '../VolunteerAllImages/logos/Group 1329.png'
 const Header = () => {
@@ -25,12 +26,12 @@ const Header = () => {
                         </div>
                         <div className="col-md-3">
                              {
-                                 loggedInUser.email ? <h5> {loggedInUser.name} </h5> : <button type="button" class="btn btn-primary">Register</button>
+                                 loggedInUser.email ? <h5 style={{width: "131px"}}> {loggedInUser.name} </h5> : <button type="button" class="btn btn-primary">Register</button>
                              }  
                         </div>
                         <div className="col-md-1">
                            {
-                               loggedInUser.email ? '' : <button type="button" class="btn btn-dark">Admin</button> 
+                               loggedInUser.email ? '' : <Link to="/admin" > <button type="button" class="btn btn-dark">Admin</button> </Link>
                            } 
                         </div>
                     </div>
